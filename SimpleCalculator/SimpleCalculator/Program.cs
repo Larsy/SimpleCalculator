@@ -58,9 +58,9 @@ namespace SimpleCalculator
             //programmet är redo att rensa skärmen och återgå till menyn. Annars, om användaren matar in något annat än giltig inmatning, inklusive att
             //enbart trycka Enter, då ritas menyn om, eller om användaren skriver 0, så avslutas programmet utan denna uppmaning..
 
-            if(int.TryParse(InputValue, out int numericinput)==true)
+            if(int.TryParse(InputValue, out int numericinput) == true)
             {
-                if (numericinput < MenuItems.Length && InputValue.Trim() != "0")
+                if (numericinput < MenuItems.Length && numericinput != 0)
                 {
                     Console.WriteLine("\nPress any key..");
                 }
