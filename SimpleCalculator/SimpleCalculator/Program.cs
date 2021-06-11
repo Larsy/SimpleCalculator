@@ -30,12 +30,12 @@ namespace SimpleCalculator
         private static void PrintMenu()
         {
             Console.Clear();
-            Console.WriteLine("\n\t\t--== Meny ==--\n");
+            Console.WriteLine("\n\t--== Meny ==--\n");
             for (int i = 1; i < MenuItems.Length; i++)
             {
                 Console.WriteLine("\t" + (i + "  ")[0..3] + MenuItems[i]);
             }
-            //skriver ut menyval 0 utanför loopen för att jag alltid vill ha den nederst
+            //Skriver ut menyval 0 utanför loopen för att jag alltid vill ha den nederst
             Console.WriteLine("\n\t0  " + MenuItems[0] + "\n");
         }
 
@@ -54,15 +54,15 @@ namespace SimpleCalculator
                 default: break;
             }
 
-            //Om användaren väljer en av posterna i menyn, då utförs den funktionen och visar resultatet, följt av Press any key.. för att indikera att
-            //programmet är redo att rensa skärmen och återgå till menyn. Annars, om användaren matar in något annat än giltig inmatning, inklusive att
-            //enbart trycka Enter, då ritas menyn om, eller om användaren skriver 0, så avslutas programmet utan denna uppmaning..
+            //Om användaren väljer en av posterna i menyn, (förutom valet 0, som avslutar programmet utan denna uppmaning), så utförs den valda funktionen
+            //och visar resultatet, följt av "Enter för att återgå till menyn.." för att indikera att programmet är redo att rensa skärmen och återgå till menyn.
+            //Annars, om användaren matar in någonting annat än en giltig inmatning, inklusive att enbart trycka Enter, då ignoreras inmatningen och menyn ritas om.
 
-            if(int.TryParse(InputValue, out int numericinput) == true)
+            if (int.TryParse(InputValue, out int numericinput) == true)
             {
                 if (numericinput < MenuItems.Length && numericinput != 0)
                 {
-                    Console.WriteLine("\nPress any key..");
+                    Console.WriteLine("\nEnter för att återgå till menyn..");
                 }
             }
         }
@@ -108,7 +108,6 @@ namespace SimpleCalculator
         {
             Console.Write("Skriv valfritt antal tal du vill multiplicera, separerade med * : ");
             string reply = Console.ReadLine().Trim();
-            //decimal[] nums;
             try
             {
                 decimal[] nums = Array.ConvertAll(reply.Split('*'), decimal.Parse);
@@ -129,7 +128,6 @@ namespace SimpleCalculator
         {
             Console.Write("Skriv valfritt antal tal i divisionen, separerade med / : ");
             string reply = Console.ReadLine().Trim();
-            //decimal[] nums;
             try
             {
                 decimal[] nums = Array.ConvertAll(reply.Split('/'), decimal.Parse);
@@ -178,13 +176,6 @@ namespace SimpleCalculator
             {
                 Console.WriteLine("Ogiltigt värde!");
             }
-        }
-
-        //Min egen funktion, namngiven efter den som Oracle har i PL/SQL och som gör första bokstaven i strängen till versal.
-        //Mycket bra att ha till hands och vill därför gärna lägga in den i alla mina projekt, utifall att..
-        private static string InitCap(string s)
-        {
-            return string.IsNullOrEmpty(s) ? string.Empty : char.ToUpper(s[0]) + s[1..];
         }
     }
 }
