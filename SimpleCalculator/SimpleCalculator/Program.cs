@@ -6,6 +6,18 @@ namespace SimpleCalculator
     class Program
     {
         static bool keeprunning = true;
+        static readonly string[] MenuItems =
+        {
+                "Avsluta",
+                "Addera tal",
+                "Subtrahera tal",
+                "Multiplicera tal",
+                "Dela tal",
+                "Roten ur",
+                "Upphöjt till",
+        };
+
+
         static void Main()
         {
             PrintMenu();
@@ -17,17 +29,6 @@ namespace SimpleCalculator
 
         private static void PrintMenu()
         {
-            string[] MenuItems = new string[]
-            {
-                "Avsluta",
-                "Addera tal",
-                "Subtrahera tal",
-                "Multiplicera tal",
-                "Dela tal",
-                "Roten ur",
-                "Upphöjt till",
-            };
-
             Console.Clear();
             Console.WriteLine("\n\t\t--== Meny ==--\n");
             for (int i = 1; i < MenuItems.Length; i++)
@@ -56,9 +57,13 @@ namespace SimpleCalculator
             //Om användaren väljer en av posterna i menyn, då utförs den funktionen och visar resultatet, följt av Press any key.. för att indikera att
             //programmet är redo att rensa skärmen och återgå till menyn. Annars, om användaren matar in något annat än giltig inmatning, inklusive att
             //enbart trycka Enter, då ritas menyn om, eller om användaren skriver 0, så avslutas programmet utan denna uppmaning..
-            if (InputValue.Trim() != "0" && InputValue.Trim() != "")
+
+            if(int.TryParse(InputValue, out int numericinput)==true)
             {
-                Console.WriteLine("\nPress any key..");
+                if (numericinput < MenuItems.Length && InputValue.Trim() != "0")
+                {
+                    Console.WriteLine("\nPress any key..");
+                }
             }
         }
 
