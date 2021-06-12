@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace SimpleCalculator
 {
     class Program
     {
-        static bool keeprunning = true;
-        static readonly string[] MenuItems =
-        {
-                "Avsluta",
-                "Addera tal",
-                "Subtrahera tal",
-                "Multiplicera tal",
-                "Dela tal",
-                "Roten ur",
-                "Upphöjt till",
-        };
-
+        private static bool keeprunning = true;
+        private static readonly SortedList<int, string> MenuItems = new SortedList<int, string>();
 
         static void Main()
         {
+            MenuItems.Add(5, "Roten ur");
+            MenuItems.Add(1, "Addera tal");
+            MenuItems.Add(3, "Multiplicera tal");
+            MenuItems.Add(2, "Subtrahera tal");
+            MenuItems.Add(6, "Upphöjt till");
+            MenuItems.Add(4, "Dela tal");
+
             PrintMenu();
-            while (keeprunning)
+            while (keeprunning == true)
             {
                 DoMenuItems(Console.ReadLine().Trim());
             }
@@ -31,12 +29,12 @@ namespace SimpleCalculator
         {
             Console.Clear();
             Console.WriteLine("\n\t--== Meny ==--\n");
-            for (int i = 1; i < MenuItems.Length; i++)
+            foreach (KeyValuePair<int, string> kvp in MenuItems)
             {
-                Console.WriteLine("\t" + (i + "  ")[0..3] + MenuItems[i]);
+                    Console.WriteLine("\t" + (kvp.Key + "  ")[0..3] + kvp.Value);
             }
             //Skriver ut menyval 0 utanför loopen för att jag alltid vill ha den nederst
-            Console.WriteLine("\n\t0  " + MenuItems[0] + "\n");
+            Console.WriteLine("\n\t0  Avsluta\n");
         }
 
         private static void DoMenuItems(string InputValue)
@@ -60,7 +58,7 @@ namespace SimpleCalculator
 
             if (int.TryParse(InputValue, out int numericinput) == true)
             {
-                if (numericinput < MenuItems.Length && numericinput != 0)
+                if (MenuItems.ContainsKey(numericinput))
                 {
                     Console.WriteLine("\nEnter för att återgå till menyn..");
                 }
