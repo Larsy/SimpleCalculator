@@ -7,16 +7,16 @@ namespace SimpleCalculator
     class Program
     {
         private static bool keeprunning = true;
-        private static readonly SortedList<int, string> MenuItems = new SortedList<int, string>();
+        private static readonly Dictionary<string, string> MenuItems = new Dictionary<string, string>();
 
         static void Main()
         {
-            MenuItems.Add(5, "Roten ur");
-            MenuItems.Add(1, "Addera tal");
-            MenuItems.Add(3, "Multiplicera tal");
-            MenuItems.Add(2, "Subtrahera tal");
-            MenuItems.Add(6, "Upphöjt till");
-            MenuItems.Add(4, "Dela tal");
+            MenuItems.Add("1", "Addera tal");
+            MenuItems.Add("2", "Subtrahera tal");
+            MenuItems.Add("3", "Multiplicera tal");
+            MenuItems.Add("4", "Dela tal");
+            MenuItems.Add("5", "Roten ur");
+            MenuItems.Add("6", "Upphöjt till");
 
             PrintMenu();
             while (keeprunning == true)
@@ -29,7 +29,7 @@ namespace SimpleCalculator
         {
             Console.Clear();
             Console.WriteLine("\n\t--== Meny ==--\n");
-            foreach (KeyValuePair<int, string> kvp in MenuItems)
+            foreach (KeyValuePair<string, string> kvp in MenuItems)
             {
                     Console.WriteLine("\t" + (kvp.Key + "  ")[0..3] + kvp.Value);
             }
@@ -56,13 +56,10 @@ namespace SimpleCalculator
             //och visar resultatet, följt av "Enter för att återgå till menyn.." för att indikera att programmet är redo att rensa skärmen och återgå till menyn.
             //Annars, om användaren matar in någonting annat än en giltig inmatning, inklusive att enbart trycka Enter, då ignoreras inmatningen och menyn ritas om.
 
-            if (int.TryParse(InputValue, out int numericinput) == true)
-            {
-                if (MenuItems.ContainsKey(numericinput))
+                if (MenuItems.ContainsKey(InputValue))
                 {
                     Console.WriteLine("\nEnter för att återgå till menyn..");
                 }
-            }
         }
 
         private static void Addition()
