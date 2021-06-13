@@ -14,7 +14,10 @@ namespace SimpleCalculator
             {"3", "Multiplicera tal"},
             {"4", "Dela tal"},
             {"5", "Roten ur"},
-            {"6", "Upphöjt till"}
+            {"6", "Upphöjt till"},
+            {"7", "Omkrets av cirkel"},
+            {"8", "Area av cirkel"},
+            {"9", "Volym av klot"}
         };
         static void Main()
         {
@@ -49,6 +52,9 @@ namespace SimpleCalculator
                 case "4": Division(); break;
                 case "5": SquareRoot(); break;
                 case "6": RaiseToPower(); break;
+                case "7": CircleCircumference(); break;
+                case "8": CircleArea(); break;
+                case "9": SphereVolume(); break;
                 default: break;
             }
 
@@ -146,7 +152,7 @@ namespace SimpleCalculator
             string inputString = Console.ReadLine().Trim();
             if (double.TryParse(inputString, out double value) == true)
             {
-                Console.WriteLine($"\tRoten ur {value} är {Math.Sqrt(value)}");
+                Console.WriteLine($"\tRoten ur {value} är : {Math.Sqrt(value)}");
             }
             else
             {
@@ -164,8 +170,50 @@ namespace SimpleCalculator
                 inputString = Console.ReadLine().Trim();
                 if (double.TryParse(inputString, out double raiseto) == true)
                 {
-                    Console.WriteLine($"\t{basenumber} upphöjt till {raiseto} är {Math.Pow(basenumber, raiseto)}");
+                    Console.WriteLine($"\t{basenumber} upphöjt till {raiseto} är : {Math.Pow(basenumber, raiseto)}");
                 }
+            }
+            else
+            {
+                Console.WriteLine("Ogiltigt värde!");
+            }
+        }
+
+        private static void CircleCircumference()
+        {
+            Console.Write("Ange cirkelns diameter i mm : ");
+            string inputString = Console.ReadLine().Trim();
+            if (double.TryParse(inputString, out double value) == true)
+            {
+                Console.WriteLine($"\tCirkeln med diameter {value} millimeter, har omkretsen : {value * Math.PI} mm");
+            }
+            else
+            {
+                Console.WriteLine("Ogiltigt värde!");
+            }
+        }
+
+        private static void CircleArea()
+        {
+            Console.Write("Ange cirkelns diameter i millimeter : ");
+            string inputString = Console.ReadLine().Trim();
+            if (double.TryParse(inputString, out double value) == true)
+            {
+                Console.WriteLine($"\tCirkeln med diameter {value} millimeter, har arean : {Math.Pow(value/2, 2) * Math.PI} mm²");
+            }
+            else
+            {
+                Console.WriteLine("Ogiltigt värde!");
+            }
+        }
+
+        private static void SphereVolume()
+        {
+            Console.Write("Ange klotets diameter i millimeter: ");
+            string inputString = Console.ReadLine().Trim();
+            if (double.TryParse(inputString, out double value) == true)
+            {
+                Console.WriteLine($"\tKlotet med diameter {value} mm, har volymen : {4 * Math.Pow(value/2, 3) * Math.PI / 3} mm³");
             }
             else
             {
