@@ -40,7 +40,7 @@ namespace SimpleCalculator
         private static void DoMenuItems(string InputValue)
         {
             PrintMenu();
-            switch (InputValue.Trim())
+            switch (InputValue)
             {
                 case "0": keeprunning = false; break;
                 case "1": Addition(); break;
@@ -161,7 +161,7 @@ namespace SimpleCalculator
             if (double.TryParse(inputString, out double basenumber) == true)
             {
                 Console.Write("Upphöjt till: ");
-                inputString = Console.ReadLine();
+                inputString = Console.ReadLine().Trim();
                 if (double.TryParse(inputString, out double raiseto) == true)
                 {
                     Console.WriteLine($"\t{basenumber} upphöjt till {raiseto} är {Math.Pow(basenumber, raiseto)}");
