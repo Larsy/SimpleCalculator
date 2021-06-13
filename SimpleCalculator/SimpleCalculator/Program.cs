@@ -31,7 +31,7 @@ namespace SimpleCalculator
             Console.WriteLine("\n\t--== Meny ==--\n");
             foreach (KeyValuePair<string, string> kvp in MenuItems)
             {
-                    Console.WriteLine("\t" + (kvp.Key + "  ")[0..3] + kvp.Value);
+                Console.WriteLine("\t" + (kvp.Key + "  ")[0..3] + kvp.Value);
             }
             //Skriver ut menyval 0 utanför loopen för att jag alltid vill ha den nederst
             Console.WriteLine("\n\t0  Avsluta\n");
@@ -56,10 +56,10 @@ namespace SimpleCalculator
             //och visar resultatet, följt av "Enter för att återgå till menyn.." för att indikera att programmet är redo att rensa skärmen och återgå till menyn.
             //Annars, om användaren matar in någonting annat än en giltig inmatning, inklusive att enbart trycka Enter, då ignoreras inmatningen och menyn ritas om.
 
-                if (MenuItems.ContainsKey(InputValue))
-                {
-                    Console.WriteLine("\nEnter för att återgå till menyn..");
-                }
+            if (MenuItems.ContainsKey(InputValue))
+            {
+                Console.WriteLine("\nEnter för att återgå till menyn..");
+            }
         }
 
         private static void Addition()
