@@ -7,17 +7,17 @@ namespace SimpleCalculator
     class Program
     {
         private static bool keeprunning = true;
-        private static readonly Dictionary<string, string> MenuItems = new Dictionary<string, string>();
-
+        private static readonly IReadOnlyDictionary<string, string> MenuItems = new Dictionary<string, string>()
+        { 
+            {"1", "Addera tal"},
+            {"2", "Subtrahera tal"},
+            {"3", "Multiplicera tal"},
+            {"4", "Dela tal"},
+            {"5", "Roten ur"},
+            {"6", "Upphöjt till"}
+        };
         static void Main()
         {
-            MenuItems.Add("1", "Addera tal");
-            MenuItems.Add("2", "Subtrahera tal");
-            MenuItems.Add("3", "Multiplicera tal");
-            MenuItems.Add("4", "Dela tal");
-            MenuItems.Add("5", "Roten ur");
-            MenuItems.Add("6", "Upphöjt till");
-
             PrintMenu();
             while (keeprunning == true)
             {
