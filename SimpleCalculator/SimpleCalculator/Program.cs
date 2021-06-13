@@ -213,7 +213,7 @@ namespace SimpleCalculator
             string inputString = Console.ReadLine().Trim();
             if (double.TryParse(inputString, out double value) == true)
             {
-                Console.WriteLine($"\tKlotet med diameter {value} mm, har volymen : {4 * Math.Pow(value/2, 3) * Math.PI / 3} mm³");
+                Console.WriteLine($"\tKlotet med diameter {value} millimeter, har volymen : {4 * Math.Pow(value/2, 3) * Math.PI / 3} mm³");
             }
             else
             {
