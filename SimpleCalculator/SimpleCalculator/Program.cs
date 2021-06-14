@@ -152,7 +152,7 @@ namespace SimpleCalculator
             string inputString = Console.ReadLine().Trim();
             if (double.TryParse(inputString, out double value) == true)
             {
-                Console.WriteLine($"\tRoten ur {value} är : {Math.Sqrt(value)}");
+                Console.WriteLine($"\tRoten ur {value} är: {Math.Sqrt(value)}");
             }
             else
             {
@@ -170,7 +170,7 @@ namespace SimpleCalculator
                 inputString = Console.ReadLine().Trim();
                 if (double.TryParse(inputString, out double raiseto) == true)
                 {
-                    Console.WriteLine($"\t{basenumber} upphöjt till {raiseto} är : {Math.Pow(basenumber, raiseto)}");
+                    Console.WriteLine($"\tBasen {basenumber} upphöjd till {raiseto} är: {Math.Pow(basenumber, raiseto)}");
                 }
             }
             else
@@ -181,11 +181,11 @@ namespace SimpleCalculator
 
         private static void CircleCircumference()
         {
-            Console.Write("Ange cirkelns diameter i mm : ");
+            Console.Write("Ange cirkelns diameter i millimeter : ");
             string inputString = Console.ReadLine().Trim();
             if (double.TryParse(inputString, out double value) == true)
             {
-                Console.WriteLine($"\tCirkeln med diameter {value} millimeter, har omkretsen : {value * Math.PI} mm");
+                Console.WriteLine($"\tCirkeln med diameter {value} millimeter, har omkretsen: {value * Math.PI} mm");
             }
             else
             {
@@ -199,7 +199,7 @@ namespace SimpleCalculator
             string inputString = Console.ReadLine().Trim();
             if (double.TryParse(inputString, out double value) == true)
             {
-                Console.WriteLine($"\tCirkeln med diameter {value} millimeter, har arean : {Math.Pow(value/2, 2) * Math.PI} mm²");
+                Console.WriteLine($"\tCirkeln med diameter {value} millimeter, har arean: {Math.Pow(value/2, 2) * Math.PI} mm²");
             }
             else
             {
@@ -209,11 +209,11 @@ namespace SimpleCalculator
 
         private static void SphereVolume()
         {
-            Console.Write("Ange klotets diameter i millimeter: ");
+            Console.Write("Ange klotets diameter i millimeter : ");
             string inputString = Console.ReadLine().Trim();
             if (double.TryParse(inputString, out double value) == true)
             {
-                Console.WriteLine($"\tKlotet med diameter {value} millimeter, har volymen : {4 * Math.Pow(value/2, 3) * Math.PI / 3} mm³");
+                Console.WriteLine($"\tKlotet med diameter {value} millimeter, har volymen: {4 * Math.Pow(value/2, 3) * Math.PI / 3} mm³");
             }
             else
             {
