@@ -19,6 +19,7 @@ namespace SimpleCalculator.Tests
             decimal[] numsArray1 = {23.45m, 6, 9, 0.316m, -10, 7, -6};
             decimal[] numsArray2 = {1, 6, -10, 8, 9.8m};
             decimal[] numsArray3 = {100, 6, 10, 8, 9.8m};
+            decimal[] numsArray4 = {100, 6, 10, 8, 0};
             
             //Act
             decimal twoNumsAddition = Program.Addition(num1, num2);
@@ -54,6 +55,7 @@ namespace SimpleCalculator.Tests
             Assert.Equal(-4704, arrayMultiplication);
 
             Assert.Equal(0.021m, arrayDivision, 3);
+            Assert.Throws<DivideByZeroException>(() => Program.Division(numsArray4));
 
             Assert.Equal(5, squareRoot);
 
