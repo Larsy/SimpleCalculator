@@ -4,20 +4,23 @@ using System.Collections.Generic;
 
 namespace SimpleCalculator
 {
-    class Program
+    public class Program
     {
+        private static decimal[] subtractionTestArray = { 3, -3, -2 };
         private static bool keeprunning = true;
         private static readonly IReadOnlyDictionary<string, string> MenuItems = new Dictionary<string, string>()
-        { 
+        {
             {"1", "Addera tal"},
-            {"2", "Subtrahera tal"},
-            {"3", "Multiplicera tal"},
-            {"4", "Dela tal"},
-            {"5", "Roten ur"},
-            {"6", "Upphöjt till"},
-            {"7", "Omkrets av cirkel"},
-            {"8", "Area av cirkel"},
-            {"9", "Volym av klot"}
+            {"2", "Addera tal (tal1, tal2)"},
+            {"3", "Subtrahera tal"},
+            {"4", "Subtrahera tal (tal1, tal2)"},
+            {"5", "Multiplicera tal"},
+            {"6", "Dela tal"},
+            {"7", "Roten ur"},
+            {"8", "Upphöjt till"},
+            {"9", "Omkrets av cirkel"},
+            {"10", "Area av cirkel"},
+            {"11", "Volym av klot"}
         };
         static void Main()
         {
@@ -46,15 +49,18 @@ namespace SimpleCalculator
             switch (InputValue)
             {
                 case "0": keeprunning = false; break;
-                case "1": Addition(); break;
-                case "2": Subtraction(); break;
-                case "3": Multiplication(); break;
-                case "4": Division(); break;
-                case "5": SquareRoot(); break;
-                case "6": RaiseToPower(); break;
-                case "7": CircleCircumference(); break;
-                case "8": CircleArea(); break;
-                case "9": SphereVolume(); break;
+                case "1": AdditionUI(false); break;
+                case "2": AdditionUI(true); break;
+                case "3": SubtractionUI(false); break;
+                case "4": SubtractionUI(true); break;
+                case "5": MultiplicationUI(); break;
+                case "6": DivisionUI(); break;
+                case "7": SquareRootUI(); break;
+                case "8": RaiseToPowerUI(); break;
+                case "9": CircleCircumferenceUI(); break;
+                case "10": CircleAreaUI(); break;
+                case "11": SphereVolumeUI(); break;
+                case "12": Console.WriteLine(Subtraction(subtractionTestArray)); break;
                 default: break;
             }
 
@@ -68,14 +74,31 @@ namespace SimpleCalculator
             }
         }
 
-        private static void Addition()
+        private static void AdditionUI(bool twoNums)
         {
-            Console.Write("Skriv valfritt antal tal du vill addera, separerade med + : ");
-            string reply = Console.ReadLine().Trim();
             try
             {
-                decimal[] nums = Array.ConvertAll(reply.Split('+'), decimal.Parse);
-                Console.WriteLine("\tSumman av talen är: " + nums.Sum());
+                if (twoNums == true)
+                {
+                    Console.Write("Skriv första talet : ");
+                    string reply = Console.ReadLine().Trim();
+                    if (decimal.TryParse(reply, out decimal numA) == true)
+                    {
+                        Console.Write("Skriv andra talet : ");
+                        reply = Console.ReadLine().Trim();
+                        if (decimal.TryParse(reply, out decimal numB) == true)
+                        {
+                            Console.WriteLine($"\tSumman av talen är: {Addition(numA, numB)}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.Write("Skriv valfritt antal tal du vill addera, separerade med + : ");
+                    string reply = Console.ReadLine().Trim();
+                    decimal[] nums = Array.ConvertAll(reply.Split('+'), decimal.Parse);
+                    Console.WriteLine($"\tSumman av talen är: {Addition(nums)}");
+                }
             }
             catch (Exception Ex)
             {
@@ -84,60 +107,101 @@ namespace SimpleCalculator
             }
         }
 
-        private static void Subtraction()
+        public static decimal Addition(decimal numA, decimal numB)
         {
-            Console.Write("Skriv valfritt antal tal du vill subtrahera, separerade med - : ");
-            string reply = Console.ReadLine().Trim();
             try
             {
-                decimal[] nums = Array.ConvertAll(reply.Split('-'), decimal.Parse);
+                return numA + numB;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static decimal Addition(decimal[] nums)
+        {
+            try
+            {
+                return nums.Sum();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private static void SubtractionUI(bool twoNums)
+        {
+            try
+            {
+                if (twoNums == true)
+                {
+                    Console.Write("Skriv första talet : ");
+                    string reply = Console.ReadLine().Trim();
+                    if (decimal.TryParse(reply, out decimal numA) == true)
+                    {
+                        Console.Write("Skriv andra talet : ");
+                        reply = Console.ReadLine().Trim();
+                        if (decimal.TryParse(reply, out decimal numB) == true)
+                        {
+                            Console.WriteLine($"\tResultatet av subtraktionen är: {Subtraction(numA, numB)}");
+                        }
+                    }
+                }
+                else
+                {
+                    Console.Write("Skriv valfritt antal tal du vill subtrahera, separerade med - : ");
+                    string reply = Console.ReadLine().Trim();
+                    decimal[] nums = Array.ConvertAll(reply.Split('-'), decimal.Parse);
+                    Console.WriteLine($"\tResultatet av subtraktionen är: {Subtraction(nums)}");
+                }
+            }
+            catch (Exception Ex)
+            {
+                Console.WriteLine(Ex.Message);
+                return;
+            }
+        }
+
+        public static decimal Subtraction(decimal numA, decimal numB)
+        {
+            try
+            {
+                return numA - numB;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public static decimal Subtraction(decimal[] nums)
+        {
+            try
+            {
                 decimal result = nums[0];
                 for (int i = 1; i < nums.Length; i++)
                 {
-                    result -= nums[i];
+                    result -= (nums[i]);
                 }
-                Console.WriteLine("\tResultatet av subtraktionen är: " + result);
+
+                return result;
             }
-            catch (Exception Ex)
+            catch (Exception)
             {
-                Console.WriteLine(Ex.Message);
-                return;
+                throw;
             }
         }
 
-        private static void Multiplication()
+        private static void MultiplicationUI()
         {
             Console.Write("Skriv valfritt antal tal du vill multiplicera, separerade med * : ");
             string reply = Console.ReadLine().Trim();
             try
             {
                 decimal[] nums = Array.ConvertAll(reply.Split('*'), decimal.Parse);
-                decimal result = nums[0];
-                for (int i = 1; i < nums.Length; i++)
-                {
-                    result *= nums[i];
-                }
-                Console.WriteLine("\tProdukten av talen är: " + result);
-            }
-            catch (Exception Ex)
-            {
-                Console.WriteLine(Ex.Message);
-                return;
-            }
-        }
-        private static void Division()
-        {
-            Console.Write("Skriv valfritt antal tal i divisionen, separerade med / : ");
-            string reply = Console.ReadLine().Trim();
-            try
-            {
-                decimal[] nums = Array.ConvertAll(reply.Split('/'), decimal.Parse);
-                decimal result = nums[0];
-                for (int i = 1; i < nums.Length; i++)
-                {
-                    result /= nums[i];
-                }
-                Console.WriteLine("\tResultatet av divisionen är: " + result);
+                Console.WriteLine($"\tProdukten av talen är: {Multiplication(nums)}");
             }
             catch (Exception Ex)
             {
@@ -146,13 +210,65 @@ namespace SimpleCalculator
             }
         }
 
-        private static void SquareRoot()
+        public static decimal Multiplication(decimal[] nums)
+        {
+            try
+            {
+                decimal result = nums[0];
+                for (int i = 1; i < nums.Length; i++)
+                {
+                    result *= nums[i];
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private static void DivisionUI()
+        {
+            Console.Write("Skriv valfritt antal tal i divisionen, separerade med / : ");
+            string reply = Console.ReadLine().Trim();
+            try
+            {
+                decimal[] nums = Array.ConvertAll(reply.Split('/'), decimal.Parse);
+                Console.WriteLine($"\tResultatet av divisionen är: {Division(nums)}");
+            }
+            catch (Exception Ex)
+            {
+                Console.WriteLine(Ex.Message);
+                return;
+            }
+        }
+
+        public static decimal Division(decimal[] nums)
+        {
+            try
+            {
+                decimal result = nums[0];
+                for (int i = 1; i < nums.Length; i++)
+                {
+                    result /= nums[i];
+                }
+
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private static void SquareRootUI()
         {
             Console.Write("Ange tal ");
             string inputString = Console.ReadLine().Trim();
             if (double.TryParse(inputString, out double value) == true)
             {
-                Console.WriteLine($"\tRoten ur {value} är: {Math.Sqrt(value)}");
+                Console.WriteLine($"\tRoten ur {value} är: {SquareRoot(value)}");
             }
             else
             {
@@ -160,7 +276,12 @@ namespace SimpleCalculator
             }
         }
 
-        private static void RaiseToPower()
+        public static double SquareRoot(double value)
+        {
+            return Math.Sqrt(value);
+        }
+
+        private static void RaiseToPowerUI()
         {
             Console.Write("Ange tal: ");
             string inputString = Console.ReadLine().Trim();
@@ -170,7 +291,7 @@ namespace SimpleCalculator
                 inputString = Console.ReadLine().Trim();
                 if (double.TryParse(inputString, out double raiseto) == true)
                 {
-                    Console.WriteLine($"\tBasen {basenumber} upphöjd till {raiseto} är: {Math.Pow(basenumber, raiseto)}");
+                    Console.WriteLine($"\tBasen {basenumber} upphöjd till {raiseto} är: {RaiseToPower(basenumber, raiseto)}");
                 }
             }
             else
@@ -179,13 +300,25 @@ namespace SimpleCalculator
             }
         }
 
-        private static void CircleCircumference()
+        public static double RaiseToPower(double basenumber, double raiseto)
+        {
+            try
+            {
+                return Math.Pow(basenumber, raiseto);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private static void CircleCircumferenceUI()
         {
             Console.Write("Ange cirkelns diameter i millimeter : ");
             string inputString = Console.ReadLine().Trim();
             if (double.TryParse(inputString, out double value) == true)
             {
-                Console.WriteLine($"\tCirkeln med diameter {value} millimeter, har omkretsen: {value * Math.PI} mm");
+                Console.WriteLine($"\tCirkeln med diameter {value} millimeter, har omkretsen: {CircleCircumference(value)} mm");
             }
             else
             {
@@ -193,13 +326,18 @@ namespace SimpleCalculator
             }
         }
 
-        private static void CircleArea()
+        public static double CircleCircumference(double value)
+        {
+            return value * Math.PI;
+        }
+
+        private static void CircleAreaUI()
         {
             Console.Write("Ange cirkelns diameter i millimeter : ");
             string inputString = Console.ReadLine().Trim();
             if (double.TryParse(inputString, out double value) == true)
             {
-                Console.WriteLine($"\tCirkeln med diameter {value} millimeter, har arean: {Math.Pow(value/2, 2) * Math.PI} mm²");
+                Console.WriteLine($"\tCirkeln med diameter {value} millimeter, har arean: {CircleArea(value)} mm²");
             }
             else
             {
@@ -207,18 +345,28 @@ namespace SimpleCalculator
             }
         }
 
-        private static void SphereVolume()
+        public static double CircleArea(double value)
+        {
+            return Math.Pow(value / 2, 2) * Math.PI;
+        }
+
+        private static void SphereVolumeUI()
         {
             Console.Write("Ange klotets diameter i millimeter : ");
             string inputString = Console.ReadLine().Trim();
             if (double.TryParse(inputString, out double value) == true)
             {
-                Console.WriteLine($"\tKlotet med diameter {value} millimeter, har volymen: {4 * Math.Pow(value/2, 3) * Math.PI / 3} mm³");
+                Console.WriteLine($"\tKlotet med diameter {value} millimeter, har volymen: {SpereVolume(value)} mm³");
             }
             else
             {
                 Console.WriteLine("Ogiltigt värde!");
             }
+        }
+
+        public static double SpereVolume(double value)
+        {
+            return 4 * Math.Pow(value / 2, 3) * Math.PI / 3;
         }
     }
 }
