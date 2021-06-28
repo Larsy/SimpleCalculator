@@ -6,7 +6,7 @@ namespace SimpleCalculator
 {
     public class Program
     {
-        private static decimal[] subtractionTestArray = { 3, -3, -2 };
+        private static decimal[] subtractionTestArray /* = { 3, -3, -2 }*/;
         private static bool keeprunning = true;
         private static readonly IReadOnlyDictionary<string, string> MenuItems = new Dictionary<string, string>()
         {
@@ -123,7 +123,14 @@ namespace SimpleCalculator
         {
             try
             {
-                return nums.Sum();
+                if (nums is null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return nums.Sum();
+                }
             }
             catch (Exception)
             {
@@ -180,13 +187,20 @@ namespace SimpleCalculator
         {
             try
             {
-                decimal result = nums[0];
-                for (int i = 1; i < nums.Length; i++)
+                if (nums is null)
                 {
-                    result -= (nums[i]);
+                    return 0;
                 }
+                else
+                {
+                    decimal result = nums[0];
+                    for (int i = 1; i < nums.Length; i++)
+                    {
+                        result -= (nums[i]);
+                    }
 
-                return result;
+                    return result;
+                }
             }
             catch (Exception)
             {
@@ -214,13 +228,20 @@ namespace SimpleCalculator
         {
             try
             {
-                decimal result = nums[0];
-                for (int i = 1; i < nums.Length; i++)
+                if (nums is null)
                 {
-                    result *= nums[i];
+                    return 0;
                 }
+                else
+                {
+                    decimal result = nums[0];
+                    for (int i = 1; i < nums.Length; i++)
+                    {
+                        result *= nums[i];
+                    }
 
-                return result;
+                    return result;
+                }
             }
             catch (Exception)
             {
@@ -248,13 +269,20 @@ namespace SimpleCalculator
         {
             try
             {
-                decimal result = nums[0];
-                for (int i = 1; i < nums.Length; i++)
+                if (nums is null)
                 {
-                    result /= nums[i];
+                    return 0;
                 }
+                else
+                {
+                    decimal result = nums[0];
+                    for (int i = 1; i < nums.Length; i++)
+                    {
+                        result /= nums[i];
+                    }
 
-                return result;
+                    return result;
+                }
             }
             catch (Exception)
             {
