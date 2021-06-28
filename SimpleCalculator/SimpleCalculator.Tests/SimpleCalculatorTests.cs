@@ -20,6 +20,7 @@ namespace SimpleCalculator.Tests
             decimal[] numsArray2 = {1, 6, -10, 8, 9.8m};
             decimal[] numsArray3 = {100, 6, 10, 8, 9.8m};
             decimal[] numsArray4 = {100, 6, 10, 8, 0};
+            decimal[] numsArray5 = {-12, -3, 5, 24};
             
             //Act
             decimal twoNumsAddition = Program.Addition(num1, num2);
@@ -29,6 +30,7 @@ namespace SimpleCalculator.Tests
             decimal arrayAddition = Program.Addition(numsArray1);
 
             decimal arraySubtraction = Program.Subtraction(numsArray2);
+            decimal arraySubtractionUlf = Program.Subtraction(numsArray5);
 
             decimal arrayMultiplication = Program.Multiplication(numsArray2);
 
@@ -51,6 +53,7 @@ namespace SimpleCalculator.Tests
 
             Assert.Equal(36.86m, twoNumsSubtraction);
             Assert.Equal(-12.8m, arraySubtraction);
+            Assert.Equal(-38, arraySubtractionUlf);
 
             Assert.Equal(-4704, arrayMultiplication);
 
